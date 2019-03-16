@@ -4,9 +4,10 @@ import { IngresoEgreso } from './ingreso-egreso.model';
 import { IngresoEgresoService } from './ingreso-egreso.service';
 import { SweetAlertService } from '../services/sweet-alert.service';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.reducer';
 import { ActivarLoadingAction, DesactivarLoadingAction } from '../shared/ui.actions';
 import { Subscription } from 'rxjs';
+
+import * as fromIngresoEgreso from './ingreso-egreso.reducer';
 
 @Component({
   selector: 'app-ingreso-egreso',
@@ -22,7 +23,7 @@ export class IngresoEgresoComponent implements OnInit, OnDestroy {
 
   constructor(private ingresoEgresoService: IngresoEgresoService,
               private sweetAlertService: SweetAlertService,
-              private store: Store<AppState>) { }
+              private store: Store<fromIngresoEgreso.AppState>) { }
 
   ngOnInit() {
 

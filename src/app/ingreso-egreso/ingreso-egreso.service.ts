@@ -9,6 +9,8 @@ import { filter, map } from 'rxjs/operators';
 import { UnsetItemsAction, SetItemsAction } from './ingreso-egreso.actions';
 import { UnsetUserAction } from '../auth/auth.actions';
 
+import * as fromIngresoEgreso from './ingreso-egreso.reducer';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +20,7 @@ export class IngresoEgresoService {
   subscriptionItems: Subscription = new Subscription();
   user: User;
   constructor(private afDb: AngularFirestore,
-              private store: Store<AppState>) { }
+              private store: Store<fromIngresoEgreso.AppState>) { }
 
   initIngresoEgresoListener() {
     this.subscriptionAuth = this.store.select('auth')
