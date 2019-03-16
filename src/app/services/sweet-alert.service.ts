@@ -32,9 +32,7 @@ export class SweetAlertService {
       showCancelButton: true,
       
     }).then((result) => {
-      if(result.value){
-        callback();
-      }
+        callback(result.value);      
     })
   }
 }

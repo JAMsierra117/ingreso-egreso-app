@@ -11,6 +11,8 @@ import { AppState } from '../app.reducer';
 import * as fromUIActions from '../shared/ui.actions';
 import { SetUserAction } from './auth.actions';
 import { Subscription } from 'rxjs';
+import { UnsetItemsAction } from '../ingreso-egreso/ingreso-egreso.actions';
+import { IngresoEgresoService } from '../ingreso-egreso/ingreso-egreso.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,8 @@ export class AuthService {
               private afdb: AngularFirestore,
               private router: Router,              
               private sweetAlertService: SweetAlertService,
-              private store: Store<AppState>) { }
+              private store: Store<AppState>
+              ) { }
 
   
   initAuthListener() {
@@ -36,7 +39,7 @@ export class AuthService {
               this.store.dispatch(accion);
             })
          } else {
-            this.store.dispatch(new SetUserAction(null));
+            this.store.dispatch(new SetUserAction(null));                                
             this.userSubscription.unsubscribe();
          }
     });
@@ -102,13 +105,24 @@ export class AuthService {
   }
 
   logout() {
+
+    return new Promise((resolve,reject) => {
+
     this.sweetAlertService
       .question("¿Estas seguro que desea salir?",
-         () => {
-          this.router.navigate(['/login']);
-          this.afAuth.auth.signOut();
+         (result) => {
+           if (result) {
+            this.router.navigate(['/login']);
+            this.afAuth.auth.signOut();
+            resolve();
+           } else {
+             reject();
+           }
+         
       }
     );   
+
+    });
   }
 
   isAuth() {

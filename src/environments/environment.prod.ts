@@ -6,6 +6,6 @@ export const environment = {
     databaseURL: "https://ingreso-egreso-app-6216f.firebaseio.com",
     projectId: "ingreso-egreso-app-6216f",
     storageBucket: "ingreso-egreso-app-6216f.appspot.com",
-    messagingSenderId: "181555665309"
+    messagingSenderId: "181555665309",
   }
 };
